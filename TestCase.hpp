@@ -42,34 +42,64 @@ public:
         return *this;
 
     }
-//    template <typename T> TestCase& check_different(T& a,T& b){
-//        if(a==b){
-//            Fcount++;
-//            err << errorType + " Failure in test #"+to_string(count)+": "+quote(a)+" should be different from "+quote(b)+"!\n";
-//        }
-//        else Pcount++;
-//        return *this;
-//
-//    }
-//    template <typename T> TestCase& check_output(T& a, string check){
-//        ostream stream(a);
-//        string str = a.str();
-//        if(str.compare(check) != 0){
-//            Fcount++;
-//            err << errorType + " Failure in test #"+to_string(count)+": the output from "+quote(a)+" should be equal "+check+"!\n";
-//        }
-//        else Pcount++;
-//        return *this;
-//    }
-//    template <typename T> TestCase& check_function(void fun(), T& input, T& check){
-//
-//        if(fun(input) == check){
-//            Fcount++;
-//            err << "Test " + (string)typeid(T).name() + " operators: Failure in test #" + to_string(count) + ": Function should return " + to_string(check) + " but returned  " + to_string(fun(input)) + "!\n";
-//        }
-//        else Pcount++;
-//        return *this;
-//    }
+    template <typename T> TestCase& check_different(const T& a,const T& b){
+        T temp = a;
+        if(!(temp!=b)){
+            Fcount++;
+            ostringstream streamA, streamB;
+            streamA<<a;
+            streamB<<a;
+            Fcount++;
+            output += errorType +
+                      " Failure in test #"+
+                      to_string(Pcount+Fcount)+
+                      ": "+
+                      streamA.str()+
+                      " should not equal "+
+                      streamB.str()+
+                      "!\n";        }
+        else Pcount++;
+        return *this;
+
+    }
+    template <typename T> TestCase& check_output(const T& a, string check){
+        ostringstream streamA;
+        streamA<<a;
+
+        if(streamA.str().compare(check) != 0){
+            Fcount++;
+            output += errorType +
+                      " Failure in test #"+
+                      to_string(Pcount+Fcount)+
+                      ": "+
+                      streamA.str()+
+                      " should be equal "+
+                      check+
+                      "!\n";
+        }
+        else Pcount++;
+        return *this;
+    }
+    template <typename T,typename F,typename C> TestCase& check_function(const F& fun, const T& input,const C& check){
+
+        if(fun(input) != check){
+            Fcount++;
+            ostringstream streamC, streamF;
+            streamC<<check;
+            streamF<<fun(input);
+            output += errorType +
+                      " Failure in test #"+
+                      to_string(Pcount+Fcount)+
+                      ": Function should return "+
+                      streamC.str()+
+                      " but returned "+
+                      streamF.str()+
+                      "!\n";
+            //err << "Test " + (string)typeid(T).name() + " operators: Failure in test #" + to_string(count) + ": Function should return " + to_string(check) + " but returned  " + to_string(fun(input)) + "!\n";
+        }
+        else Pcount++;
+        return *this;
+    }
     void  print(){
         output+=errorType+
             ": "+
