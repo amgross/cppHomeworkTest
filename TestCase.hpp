@@ -30,7 +30,7 @@ public:
             streamB<<a;
             Fcount++;
             output += errorType +
-                    " Failure in test #"+
+                    ": Failure in test #"+
                     to_string(Pcount+Fcount)+
                     ": "+
                     streamA.str()+
@@ -51,7 +51,7 @@ public:
             streamB<<a;
             Fcount++;
             output += errorType +
-                      " Failure in test #"+
+                      ": Failure in test #"+
                       to_string(Pcount+Fcount)+
                       ": "+
                       streamA.str()+
@@ -69,13 +69,15 @@ public:
         if(streamA.str().compare(check) != 0){
             Fcount++;
             output += errorType +
-                      " Failure in test #"+
+                      ": Failure in test #"+
                       to_string(Pcount+Fcount)+
                       ": "+
                       streamA.str()+
-                      " should be equal "+
+                      " string value should be "+
                       check+
-                      "!\n";
+                    " but is "+
+                    streamA.str()+
+                      "\n";
         }
         else Pcount++;
         return *this;
@@ -88,7 +90,7 @@ public:
             streamC<<check;
             streamF<<fun(input);
             output += errorType +
-                      " Failure in test #"+
+                      ": Failure in test #"+
                       to_string(Pcount+Fcount)+
                       ": Function should return "+
                       streamC.str()+
