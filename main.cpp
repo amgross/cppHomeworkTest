@@ -66,7 +66,7 @@ int main() {
             .print();
 
     TestCase("Test MyStruct operators", cerr)
-//            .check_equal(MyStruct(5), MyStruct(5))      // Here there is a bug.
+            .check_equal(MyStruct(5), MyStruct(5))      // Here there is a bug.
 //            .check_different(MyStruct(5), MyStruct(6))  // Here there is no bug.
 //            .check_output(MyStruct(5), "MyStruct(5)")   // Here there is a bug.
 //            .check_function(getNum, MyStruct(5), 5)     // Here there is a bug.
