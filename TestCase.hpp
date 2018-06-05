@@ -11,11 +11,13 @@
 using namespace std;
 class TestCase{
     string errorType;
-    int count;
+    string output;
+    int Fcount, Pcount;
     ostream *err;
 public:
-    TestCase(string arg, ostream& er):errorType (arg){//},err(er){
+    TestCase(string arg, ostream& er):errorType (arg),Fcount(0),Pcount(0){//},err(er){
         err = &er;
+        output="";
     }
 
 
@@ -53,7 +55,15 @@ public:
 //        return *this;
 //    }
     void  print(){
-        cout<< errorType;
+        output+=errorType+
+            ": "+
+                to_string(Fcount)+
+                " failed, "+
+                to_string(Pcount)+
+                " passed, "+
+                to_string(Fcount+Pcount)+
+                " total.\n---\n";
+        cout<< output;
     }
 
 
