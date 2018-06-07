@@ -1,10 +1,9 @@
 //
 // Created by אריה גרוס on 04 יוני 2018.
 //
-
 #ifndef CPPHOMEWORKTEST_TESTCASE_H
 #define CPPHOMEWORKTEST_TESTCASE_H
-#include <typeinfo>
+#include <sstream>
 #include <string>
 #include <iostream>
 
@@ -12,13 +11,14 @@ using namespace std;
 class TestCase{
     string errorType;
     string output;
-    int Fcount, Pcount;
-    ostream *err;
+    int Fcount,//how many tests faiyeled
+            Pcount;//how many testes passed
+    ostream *err;//output
 public:
-    TestCase(string arg, ostream& er):errorType (arg),Fcount(0),Pcount(0){
-        err = &er;
-        output="";
-    }
+    /*
+     * basic constructor
+     */
+    TestCase(string arg, ostream& er);
 
 
     template <typename T> TestCase& check_equal(const T& a,const T& b){
@@ -97,22 +97,11 @@ public:
                       " but returned "+
                       streamF.str()+
                       "!\n";
-            //err << "Test " + (string)typeid(T).name() + " operators: Failure in test #" + to_string(count) + ": Function should return " + to_string(check) + " but returned  " + to_string(fun(input)) + "!\n";
         }
         else Pcount++;
         return *this;
     }
-    void  print(){
-        output+=errorType+
-            ": "+
-                to_string(Fcount)+
-                " failed, "+
-                to_string(Pcount)+
-                " passed, "+
-                to_string(Fcount+Pcount)+
-                " total.\n---\n";
-        *err<< output;
-    }
+    void  print();
 
 
 };
