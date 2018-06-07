@@ -15,7 +15,7 @@ class TestCase{
     int Fcount, Pcount;
     ostream *err;
 public:
-    TestCase(string arg, ostream& er):errorType (arg),Fcount(0),Pcount(0){//},err(er){
+    TestCase(string arg, ostream& er):errorType (arg),Fcount(0),Pcount(0){
         err = &er;
         output="";
     }
