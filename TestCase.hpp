@@ -111,7 +111,7 @@ public:
                 " passed, "+
                 to_string(Fcount+Pcount)+
                 " total.\n---\n";
-        cout<< output;
+        *err<< output;
     }
 
 
