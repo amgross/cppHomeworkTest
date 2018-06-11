@@ -22,9 +22,7 @@ public:
 
 
     template <typename T> TestCase& check_equal(const T& a,const T& b){
-        //because the == operator in erel test is'nt const!!!
-        T temp = a;
-        if(!(temp==b)){
+        if(!(a==b)){
             ostringstream streamA, streamB;
             streamA<<a;
             streamB<<a;
@@ -43,8 +41,7 @@ public:
 
     }
     template <typename T> TestCase& check_different(const T& a,const T& b){
-        T temp = a;
-        if(!(temp!=b)){
+        if(!(a!=b)){
             Fcount++;
             ostringstream streamA, streamB;
             streamA<<a;
