@@ -41,7 +41,7 @@ public:
 
     }
     template <typename T> TestCase& check_different(const T& a,const T& b){
-        if((a==b)){
+        if(!(a!=b)){
             Fcount++;
             ostringstream streamA, streamB;
             streamA<<a;
